@@ -2,30 +2,30 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-appName: nginx
-appVersion: 0.0.0.0
+replicaCount: 1 # Number of replicas for the application
+appName: nginx # Name of the application
+appVersion: 0.0.0.0 # Version of the application
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: nginx # Image repository
+  pullPolicy: IfNotPresent # Image pull policy
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "latest" # Image tag
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+imagePullSecrets: [] # Image pull secrets
+nameOverride: "" # Override the name of the chart
+fullnameOverride: "" # Override the full name of the chart
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: false # Create a service account
   # Annotations to add to the service account
-  annotations: {}
+  annotations: {} # Annotations for the service account
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "" # Name of the service account
 
-podAnnotations: {}
+podAnnotations: {} # Annotations for the pod
 
 podSecurityContext:
   {}
@@ -40,39 +40,39 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
-serviceType: ClusterIP
+serviceType: ClusterIP # Type of service
 services:
-  - serviceName: rest
-    exposedPort: 8000
-    containerPort: 8000
-  - serviceName: grpc
-    exposedPort: 9000
-    containerPort: 9000
+  - serviceName: rest # Name of the service
+    exposedPort: 8000 # Port exposed by the service
+    containerPort: 8000 # Port exposed by the container
+  - serviceName: grpc # Name of the service
+    exposedPort: 9000 # Port exposed by the service
+    containerPort: 9000 # Port exposed by the container
 
-volumeMounts: []
-volumes: {}
+volumeMounts: [] # Volume mounts for the pod
+volumes: {} # Volumes for the pod
 
 resources:
   limits:
-    cpu: 10m
-    memory: 32Mi
+    cpu: 10m # CPU limit
+    memory: 32Mi # Memory limit
   requests:
-    cpu: 10m
-    memory: 32Mi
+    cpu: 10m # CPU request
+    memory: 32Mi # Memory request
 
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 1
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  enabled: false # Enable autoscaling
+  minReplicas: 1 # Minimum number of replicas
+  maxReplicas: 1 # Maximum number of replicas
+  targetCPUUtilizationPercentage: 80 # Target CPU utilization percentage
+  targetMemoryUtilizationPercentage: 80 # Target memory utilization percentage
 
-nodeSelector: {}
+nodeSelector: {} # Node selector for the pod
 
-tolerations: []
+tolerations: [] # Tolerations for the pod
 
-affinity: {}
+affinity: {} # Affinity rules for the pod
 
 hostAliases:
-  enabled: true
+  enabled: true # Enable host aliases
 
