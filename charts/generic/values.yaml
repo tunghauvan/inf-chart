@@ -49,9 +49,7 @@ services:
     exposedPort: 9000
     containerPort: 9000
 
-volumeMounts:
-  - name: config-map
-    mountPath: /data/conf/
+volumeMounts: []
 volumes: {}
 
 resources:
@@ -77,3 +75,4 @@ affinity: {}
 
 hostAliases:
   enabled: true
+
