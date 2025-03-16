@@ -1,0 +1,6 @@
+{{- range $appName, $app := .Values }}
+{{- if (eq $app.type "application") }}
+  {{- include "infra.argocdApp" (dict "appName" $appName "app" $app "global" $.Values.environment) }}
+---
+{{- end }}
+{{- end }}

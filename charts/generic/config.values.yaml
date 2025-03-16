@@ -1,0 +1,5 @@
+configs:
+  # Add your secrets here
+  data:
+    ENV: dev
+    PORT: 8000

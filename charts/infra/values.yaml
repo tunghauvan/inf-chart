@@ -1,0 +1,14 @@
+environment:
+  name: dev
+  targetRevision: dev
+  project: default
+  repoURL: https://github.com/tunghauvan/inf-chart.git
+
+nginx:
+  type: application
+  namespace: dev
+  replicaCount: 1
+  override_values: []
+  data: {}
+  image:
+    tag: "latest"
