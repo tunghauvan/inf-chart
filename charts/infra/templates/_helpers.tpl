@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ .app.namespace }}-{{ .appName | replace "_" "-" }}
-  namespace: argocd
+  namespace: {{ .app.namespace }}
 spec:
   destination:
     namespace: '{{ .app.namespace }}'
