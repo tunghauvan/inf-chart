@@ -7,12 +7,12 @@ metadata:
 spec:
   destination:
     namespace: '{{ .app.namespace }}'
-    server: https://kubernetes.environment.svc
+    server: https://kubernetes.default.svc
   project: {{ .global.project }}
   source:
     path: charts/generic
-    repoURL: '{{ environment .global.repoURL .app.repoURL }}'
-    targetRevision: '{{ environment .global.targetRevision .app.targetRevision }}'
+    repoURL: '{{ default .global.repoURL .app.repoURL }}'
+    targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
   sources:
     - helm:
         valueFiles:
@@ -33,9 +33,9 @@ spec:
             value: '{{ $value }}'
           {{- end }}
       path: charts/generic
-      repoURL: '{{ environment .global.repoURL .app.repoURL }}'
-      targetRevision: '{{ environment .global.targetRevision .app.targetRevision }}'
+      repoURL: '{{ default .global.repoURL .app.repoURL }}'
+      targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
     - ref: service_value
-      repoURL: '{{ environment .global.repoURL .app.repoURL }}'
-      targetRevision: '{{ environment .global.targetRevision .app.targetRevision }}'
+      repoURL: '{{ default .global.repoURL .app.repoURL }}'
+      targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
 {{- end -}}
