@@ -3,11 +3,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ .app.namespace }}-{{ .appName | replace "_" "-" }}
-  namespace: {{ .app.namespace }}
+  namespace: argocd
 spec:
   destination:
     namespace: '{{ .app.namespace }}'
-    server: https://kubernetes.default.svc
+    server: '{{ .global.server }}'
   project: {{ .global.project }}
   source:
     path: charts/generic

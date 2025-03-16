@@ -3,6 +3,7 @@ environment:
   targetRevision: dev
   project: default
   repoURL: https://github.com/tunghauvan/inf-chart.git
+  server: https://kubernetes.default.svc
 
 nginx:
   type: application
