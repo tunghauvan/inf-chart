@@ -7,9 +7,11 @@ environment:
 
 nginx:
   type: application
+  uniqueValue: ''
   namespace: dev
   replicaCount: 1
   override_values: []
   data: {}
   image:
     tag: "latest"
+  

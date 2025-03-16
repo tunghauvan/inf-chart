@@ -15,8 +15,10 @@ spec:
     targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
   sources:
     - helm:
+        {{- if .app.uniqueValue }}
         valueFiles:
-          - $service_value/{{ .global.name }}/{{ .appName }}-accesstrade.yaml
+          - $service_value/{{ .global.name }}/{{ .appName }}.yaml
+        {{- end }}
         parameters:
           - name: replicaCount
             value: '{{ .app.replicaCount }}'
