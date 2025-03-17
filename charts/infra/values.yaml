@@ -6,6 +6,11 @@ environment:
   server: https://kubernetes.default.svc
   chartTargetRevision: dev
   chartRepoURL: https://github.com/tunghauvan/inf-chart.git
+  extra_sources:
+    - ref: service_value
+      repoURL: https://github.com/tunghauvan/inf-chart.git
+      targetRevision: dev
+      yamlPath: charts/infra/values.yaml
 
 nginx:
   type: application
@@ -16,4 +21,3 @@ nginx:
   data: {}
   image:
     tag: "latest"
-  

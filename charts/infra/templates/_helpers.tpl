@@ -16,13 +16,18 @@ spec:
   sources:
     - helm:
         valueFiles:
-        {{- if or .app.uniqueValue .app.extra_sources }}
+        {{- if or .app.uniqueValue .app.extra_sources .global.extra_sources }}
         {{- if .app.uniqueValue }}
           - $service_value/{{ .global.name }}/{{ .appName }}.yaml
         {{- end }}
         {{- if .app.extra_sources }}
         {{- range .app.extra_sources }}
-          - service_value/{{ .path}}
+          - $service_value/{{ .yamlPath }}
+        {{- end }}
+        {{- end }}
+        {{- if .global.extra_sources }}
+        {{- range .global.extra_sources }}
+          - $service_value/{{ .yamlPath }}
         {{- end }}
         {{- end }}
         {{- end }}
@@ -50,7 +55,14 @@ spec:
       {{- if .app.extra_sources }}
       {{- range .app.extra_sources }}
     - ref: {{ .ref }}
-      repoURL: '{{ .repoURL }}
+      repoURL: '{{ .repoURL }}'
+      targetRevision: '{{ .targetRevision }}'
+      {{- end }}
+      {{- end }}
+      {{- if .global.extra_sources }}
+      {{- range .global.extra_sources }}
+    - ref: {{ .ref }}
+      repoURL: '{{ .repoURL }}'
       targetRevision: '{{ .targetRevision }}'
       {{- end }}
       {{- end }}
