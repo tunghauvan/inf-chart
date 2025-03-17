@@ -15,9 +15,16 @@ spec:
     targetRevision: '{{ default .global.chartTargetRevision .app.chartTargetRevision }}'
   sources:
     - helm:
-        {{- if .app.uniqueValue }}
         valueFiles:
+        {{- if or .app.uniqueValue .app.extra_sources }}
+        {{- if .app.uniqueValue }}
           - $service_value/{{ .global.name }}/{{ .appName }}.yaml
+        {{- end }}
+        {{- if .app.extra_sources }}
+        {{- range .app.extra_sources }}
+          - service_value/{{ .path}}
+        {{- end }}
+        {{- end }}
         {{- end }}
         parameters:
           - name: replicaCount
@@ -40,4 +47,11 @@ spec:
     - ref: service_value
       repoURL: '{{ default .global.repoURL .app.repoURL }}'
       targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
+      {{- if .app.extra_sources }}
+      {{- range .app.extra_sources }}
+    - ref: {{ .ref }}
+      repoURL: '{{ .repoURL }}
+      targetRevision: '{{ .targetRevision }}'
+      {{- end }}
+      {{- end }}
 {{- end -}}
