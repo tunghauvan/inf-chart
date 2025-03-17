@@ -11,8 +11,8 @@ spec:
   project: {{ .global.project }}
   source:
     path: charts/generic
-    repoURL: '{{ default .global.repoURL .app.repoURL }}'
-    targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
+    repoURL: '{{ default .global.repoURL .app.chartRepoURL }}'
+    targetRevision: '{{ default .global.targetRevision .app.chartTargetRevision }}'
   sources:
     - helm:
         {{- if .app.uniqueValue }}
@@ -35,8 +35,8 @@ spec:
             value: '{{ $value }}'
           {{- end }}
       path: charts/generic
-      repoURL: '{{ default .global.repoURL .app.repoURL }}'
-      targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
+      repoURL: '{{ default .global.repoURL .app.chartRepoURL }}'
+      targetRevision: '{{ default .global.targetRevision .app.chartTargetRevision }}'
     - ref: service_value
       repoURL: '{{ default .global.repoURL .app.repoURL }}'
       targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
