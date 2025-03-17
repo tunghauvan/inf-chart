@@ -7,7 +7,7 @@ environment:
   chartTargetRevision: dev
   chartRepoURL: https://github.com/tunghauvan/inf-chart.git
   extra_sources:
-    - ref: service_value
+    - ref: global_service_value
       repoURL: https://github.com/tunghauvan/inf-chart.git
       targetRevision: dev
       yamlPath: charts/infra/values.yaml

@@ -18,16 +18,16 @@ spec:
         valueFiles:
         {{- if or .app.uniqueValue .app.extra_sources .global.extra_sources }}
         {{- if .app.uniqueValue }}
-          - $service_value/{{ .global.name }}/{{ .appName }}.yaml
+          - $default_service_value/{{ .global.name }}/{{ .appName }}.yaml
         {{- end }}
         {{- if .app.extra_sources }}
         {{- range .app.extra_sources }}
-          - $service_value/{{ .yamlPath }}
+          - $app_{{ .ref }}/{{ .yamlPath }}
         {{- end }}
         {{- end }}
         {{- if .global.extra_sources }}
         {{- range .global.extra_sources }}
-          - $service_value/{{ .yamlPath }}
+          - $global_{{ .ref }}/{{ .yamlPath }}
         {{- end }}
         {{- end }}
         {{- end }}
@@ -49,19 +49,19 @@ spec:
       path: charts/generic
       repoURL: '{{ default .global.chartRepoURL .app.chartRepoURL }}'
       targetRevision: '{{ default .global.chartTargetRevision .app.chartTargetRevision }}'
-    - ref: service_value
+    - ref: default_service_value
       repoURL: '{{ default .global.repoURL .app.repoURL }}'
       targetRevision: '{{ default .global.targetRevision .app.targetRevision }}'
       {{- if .app.extra_sources }}
       {{- range .app.extra_sources }}
-    - ref: {{ .ref }}
+    - ref: app_{{ .ref }}
       repoURL: '{{ .repoURL }}'
       targetRevision: '{{ .targetRevision }}'
       {{- end }}
       {{- end }}
       {{- if .global.extra_sources }}
       {{- range .global.extra_sources }}
-    - ref: {{ .ref }}
+    - ref: global_{{ .ref }}
       repoURL: '{{ .repoURL }}'
       targetRevision: '{{ .targetRevision }}'
       {{- end }}
