@@ -6,6 +6,7 @@ environment:
   server: https://kubernetes.default.svc
   chartTargetRevision: dev
   chartRepoURL: https://github.com/tunghauvan/inf-chart.git
+  chartPath: charts/generic
   extra_sources:
     - ref: global_service_value
       repoURL: https://github.com/tunghauvan/inf-chart.git
