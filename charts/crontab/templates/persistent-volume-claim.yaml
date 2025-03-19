@@ -1,0 +1,19 @@
+{{- if .Values.persistence }}
+  {{- if .Values.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-data-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  storageClassName: {{ .Values.persistence.storageClass | default "local-path" | quote }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size | default "1Gi" }}
+  {{- if .Values.persistence.persistentVolumeReclaimPolicy }}
+  persistentVolumeReclaimPolicy: {{ .Values.persistence.persistentVolumeReclaimPolicy }}
+  {{- end }}
+  {{- end }}
+{{- end }}

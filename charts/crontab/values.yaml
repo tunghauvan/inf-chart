@@ -1,0 +1,92 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1 # Number of replicas for the application
+appName: crontab # Name of the application
+appVersion: 0.0.0.0 # Version of the application
+
+image:
+  repository: "bitnami/kubectl" # Image repository
+  pullPolicy: IfNotPresent # Image pull policy
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest" # Image tag
+
+command: [echo, "Hello, Kubernetes!"] # Command to run
+args: [] # Arguments to the command
+
+imagePullSecrets: [] # Image pull secrets
+nameOverride: "" # Override the name of the chart
+fullnameOverride: "" # Override the full name of the chart
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false # Create a service account
+  # Annotations to add to the service account
+  annotations: {} # Annotations for the service account
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "" # Name of the service account
+
+podAnnotations: {} # Annotations for the pod
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+serviceType: ClusterIP # Type of service
+services:
+  - serviceName: rest # Name of the service
+    exposedPort: 8000 # Port exposed by the service
+    containerPort: 8000 # Port exposed by the container
+  - serviceName: grpc # Name of the service
+    exposedPort: 9000 # Port exposed by the service
+    containerPort: 9000 # Port exposed by the container
+
+volumeMounts: [] # Volume mounts for the pod
+volumes: {} # Volumes for the pod
+
+resources:
+  limits:
+    cpu: 10m # CPU limit
+    memory: 32Mi # Memory limit
+  requests:
+    cpu: 10m # CPU request
+    memory: 32Mi # Memory request
+
+autoscaling:
+  enabled: false # Enable autoscaling
+  minReplicas: 1 # Minimum number of replicas
+  maxReplicas: 1 # Maximum number of replicas
+  targetCPUUtilizationPercentage: 80 # Target CPU utilization percentage
+  targetMemoryUtilizationPercentage: 80 # Target memory utilization percentage
+
+nodeSelector: {} # Node selector for the pod
+
+tolerations: [] # Tolerations for the pod
+
+affinity: {} # Affinity rules for the pod
+
+hostAliases:
+  enabled: true # Enable host aliases
+
+cronjob:
+  schedule: "*/5 * * * *" # Example: every 5 minutes
+  concurrencyPolicy: "Forbid" # or "Allow", "Replace"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+
+configs:
+  data: {} # Data for the config maps
+
+secrets:
+  data: {} # Data for the secrets
