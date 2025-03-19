@@ -84,6 +84,7 @@ cronjob:
   concurrencyPolicy: "Forbid" # or "Allow", "Replace"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
+  restartPolicy: "OnFailure"
 
 configs:
   data: {} # Data for the config maps
