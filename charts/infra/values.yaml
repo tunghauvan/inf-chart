@@ -13,12 +13,12 @@ environment:
       targetRevision: dev
       yamlPath: charts/infra/values.yaml
 
-nginx:
-  type: application
-  uniqueValue: ''
-  namespace: dev
-  replicaCount: 1
-  override_values: []
-  data: {}
-  image:
-    tag: "latest"
+# nginx:
+#   type: application
+#   uniqueValue: ''
+#   namespace: dev
+#   replicaCount: 1
+#   override_values: []
+#   data: {}
+#   image:
+#     tag: "latest"
