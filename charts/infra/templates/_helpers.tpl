@@ -46,7 +46,7 @@ spec:
           - name: {{ $key }}
             value: '{{ $value }}'
           {{- end }}
-      path: {{ default charts/generic .app.path }}
+      path: {{ default charts/generic .app.chartsPath }}
       repoURL: '{{ default .global.chartRepoURL .app.chartRepoURL }}'
       targetRevision: '{{ default .global.chartTargetRevision .app.chartTargetRevision }}'
     - ref: default_service_value
